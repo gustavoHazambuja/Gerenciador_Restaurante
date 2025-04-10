@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import API_Restaurante.Enums.EnumPrato;
 import API_Restaurante.Models.Prato;
 import API_Restaurante.Services.PratoService;
 
@@ -40,6 +42,14 @@ public class PratoController {
         Page<Prato> result = pratoService.findByName(name, pageable);
 
         return new ResponseEntity<>(result,HttpStatus.FOUND);
+    }
+
+    @GetMapping(value = "/tipoPrato")
+    public ResponseEntity<Page<Prato>> findByTypePrato(@RequestParam (value = "tipoPrato") EnumPrato enumPrato, Pageable pageable){
+
+        Page<Prato> result = pratoService.findByTypePrato(enumPrato, pageable);
+
+        return new ResponseEntity<>(result,HttpStatus.OK);
     }
 
     @PostMapping

@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import API_Restaurante.Enums.EnumPrato;
 import API_Restaurante.Exceptions.PratoException;
 import API_Restaurante.Models.Prato;
 import API_Restaurante.Repositories.PratoRepository;
@@ -33,6 +34,14 @@ public class PratoService {
     public Page<Prato> findByName(String name, Pageable pageable){
 
         Page<Prato> result = pratoRepository.findByNameContainingIgnoreCase(name, pageable);
+
+        return result;
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Prato> findByTypePrato(EnumPrato enumPrato, Pageable pageable){
+
+        Page<Prato> result = pratoRepository.findByTypePrato(enumPrato, pageable);
 
         return result;
     }

@@ -3,6 +3,7 @@ package API_Restaurante.Models;
 import java.util.UUID;
 
 import API_Restaurante.Enums.EnumPrato;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -30,6 +31,7 @@ public class Prato {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
+    @Column(unique = true)
     private String name;
     private Double price;
 
