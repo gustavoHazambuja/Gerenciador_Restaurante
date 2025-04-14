@@ -30,5 +30,5 @@ public class Reserva {
     private Integer capacidade;
 
     @Enumerated(EnumType.STRING)
-    private EnumReserva enumReserva;
+    private EnumReserva statusReserva;
 }

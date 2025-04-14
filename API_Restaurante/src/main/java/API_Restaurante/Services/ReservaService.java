@@ -68,9 +68,12 @@ public class ReservaService {
 
      Reserva result = reservaRepository.findById(id).get();
 
-        if(result != null){
-            result.setCapacidade(result.getCapacidade());
-            result.setEnumReserva(result.getEnumReserva());
+        if(reserva.getCapacidade() != null){
+            result.setCapacidade(reserva.getCapacidade());
+        }
+
+        if(reserva.getStatusReserva() != null){
+            result.setStatusReserva(reserva.getStatusReserva());
         }
 
         return reservaRepository.save(result);
