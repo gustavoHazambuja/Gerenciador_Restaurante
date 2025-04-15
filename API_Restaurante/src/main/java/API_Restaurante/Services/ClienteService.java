@@ -10,13 +10,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 import API_Restaurante.Exceptions.ClienteException;
 import API_Restaurante.Models.Cliente;
+import API_Restaurante.Models.Reserva;
 import API_Restaurante.Repositories.ClienteRepository;
+import API_Restaurante.Repositories.ReservaRepository;
+import API_Restaurante.Enums.EnumReserva;
 
 @Service
 public class ClienteService {
     
     @Autowired
     private ClienteRepository clienteRepository;
+
+    @Autowired
+    private ReservaRepository reservaRepository;
 
     @Transactional(readOnly = true)
     public Page<Cliente> getAllClientes(Pageable pageable){
@@ -48,6 +54,20 @@ public class ClienteService {
         }
 
         clienteRepository.deleteById(id);
+        return true;
+    }
+
+    @Transactional
+    public boolean fazerReserva(UUID id){
+
+        Reserva reserva = reservaRepository.findById(id)
+            .orElseThrow(() ->  new ClienteException("Reserva com o id " + id + " não encontrado."));
+
+        if(reserva.getStatusReserva() == EnumReserva.OCUPADA){
+            throw new ClienteException("Reserva já ocupada.");
+        }
+
+        reserva.setStatusReserva(EnumReserva.OCUPADA);
         return true;
     }
 }

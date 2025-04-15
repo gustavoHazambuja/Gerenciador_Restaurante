@@ -54,4 +54,10 @@ public class ClienteController {
 
         return clienteService.deleteCliente(id);
     }
+
+    @PostMapping(value = "/reservar/{id}")
+    public boolean fazerReserva(@PathVariable UUID id){
+
+        return clienteService.fazerReserva(id);
+    }
 }
