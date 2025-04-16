@@ -31,4 +31,5 @@ public class Reserva {
 
     @Enumerated(EnumType.STRING)
     private EnumReserva statusReserva;
+    
 }

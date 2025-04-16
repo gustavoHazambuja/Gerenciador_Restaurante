@@ -7,7 +7,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import API_Restaurante.ApiRestauranteApplication;
 import API_Restaurante.Exceptions.ReservaException;
 import API_Restaurante.Models.Reserva;
 import API_Restaurante.Repositories.ReservaRepository;
@@ -15,14 +14,9 @@ import API_Restaurante.Repositories.ReservaRepository;
 @Service
 public class ReservaService {
 
-    private final ApiRestauranteApplication apiRestauranteApplication;
     
     @Autowired
     private ReservaRepository reservaRepository;
-
-    ReservaService(ApiRestauranteApplication apiRestauranteApplication) {
-        this.apiRestauranteApplication = apiRestauranteApplication;
-    }
 
    @Transactional(readOnly = true) 
    public Page<Reserva> getAll(Pageable pageable){
