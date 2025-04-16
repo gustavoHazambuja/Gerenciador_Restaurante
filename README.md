@@ -3,7 +3,7 @@
 
 # Sobre o projeto
 
-Gerenciador de Restaurante é um projeto backend que consiste em uma pequena aplicação para gerir um restaurante. Nela podemos adicionar pratos para formar o cardápio, seus clientes e fazer reservas para o resutaurante.
+Gerenciador de Restaurante é um projeto backend que consiste em uma pequena aplicação para gerir um restaurante. Nela podemos adicionar pratos para formar o cardápio, seus clientes e fazer reservas para o restaurante.
 
 
 ## Código
