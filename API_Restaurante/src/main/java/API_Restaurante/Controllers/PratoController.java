@@ -1,5 +1,6 @@
 package API_Restaurante.Controllers;
 
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,11 @@ public class PratoController {
         return new ResponseEntity<>(result,HttpStatus.OK);
     }
 
+    @GetMapping(value = "/valido/{id}")
+    public boolean validaPrato(@PathVariable Integer id){
+        return pratoService.validaPrato(id);
+    }
+
     @GetMapping(value = "/{name}")
     public ResponseEntity<Page<Prato>> findByName(@PathVariable String name, Pageable pageable){
 
@@ -52,22 +58,28 @@ public class PratoController {
         return new ResponseEntity<>(result,HttpStatus.OK);
     }
 
-    @PostMapping
-    public ResponseEntity<Prato> createPrato(@RequestBody Prato prato){
+    @PostMapping(value = "/cadastro")
+    public ResponseEntity<?> cadastrarPrato(@RequestBody Prato prato){
+        boolean resposta = pratoService.cadastrarPrato(prato);
 
-        Prato result = pratoService.createPrato(prato);
-
-        return new ResponseEntity<>(result, HttpStatus.CREATED);
+            if(resposta){
+                return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(Map.of("resposta", resposta, "mensagem", "Prato cadastrado com sucesso."));
+            }
+            else{
+                return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body(Map.of("resposta", resposta, "mensagem", "Falha no cadastro: id do prato já existente."));
+            }
     }
 
     @DeleteMapping(value = "/{id}")
-    public void deletePrato(@PathVariable UUID id){
+    public void deletePrato(@PathVariable Integer id){
 
         pratoService.deleteById(id);
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Prato> updatePrato(@PathVariable UUID id, @RequestBody Prato prato){
+    public ResponseEntity<Prato> updatePrato(@PathVariable Integer id, @RequestBody Prato prato){
 
         Prato result = pratoService.updatePrato(id, prato);
 

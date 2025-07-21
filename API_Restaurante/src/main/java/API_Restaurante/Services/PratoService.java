@@ -30,6 +30,11 @@ public class PratoService {
         return result;
     }
 
+    @Transactional
+    public boolean validaPrato(Integer id){
+        return pratoRepository.existsById(id);
+    }
+
     @Transactional(readOnly =  true)
     public Page<Prato> findByName(String name, Pageable pageable){
 
@@ -47,15 +52,18 @@ public class PratoService {
     }
 
     @Transactional
-    public Prato createPrato(Prato p){
+    public boolean cadastrarPrato(Prato p){
 
-        Prato result = pratoRepository.save(p);
-
-        return result;
+        if(pratoRepository.existsById(p.getId())){
+            return false;
+        }
+       
+            pratoRepository.save(p);
+            return true;
     }
 
     @Transactional
-    public void deleteById(UUID id){
+    public void deleteById(Integer id){
 
         if(!pratoRepository.existsById(id)){
             throw new PratoException("Prato com id " + id + " não encontrado.");
@@ -64,7 +72,7 @@ public class PratoService {
     }
 
     @Transactional
-    public Prato updatePrato(UUID id, Prato prato){
+    public Prato updatePrato(Integer id, Prato prato){
 
         if(!pratoRepository.existsById(id)){
             throw new PratoException("Prato com id " + id + " não encontrado.");

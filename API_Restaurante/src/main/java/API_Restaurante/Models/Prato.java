@@ -28,14 +28,15 @@ import lombok.Setter;
 public class Prato {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private Integer id;
 
     @Column(unique = true)
     private String name;
     private Double price;
 
+    
     @Enumerated(EnumType.STRING)
+    @Column(name = "type_prato")
     private EnumPrato typePrato;
 
 }

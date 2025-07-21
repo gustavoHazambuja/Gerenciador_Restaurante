@@ -10,7 +10,7 @@ import API_Restaurante.Enums.EnumPrato;
 import API_Restaurante.Models.Prato;
 
 
-public interface PratoRepository extends JpaRepository<Prato, UUID> {
+public interface PratoRepository extends JpaRepository<Prato, Integer> {
     
     Page<Prato> findByNameContainingIgnoreCase(String name, Pageable pageable);
 
